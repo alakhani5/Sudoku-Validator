@@ -1,0 +1,88 @@
+/*
+Interview style algorithm problem
+
+Validator for Sudoku solutions
+
+Iteration (loops)
+Data types (nested arrays)
+
+Board is solved IF
+Numbers are used only once per row
+Numbers are used only once per column
+Numbers are used only once per area
+
+Consume a sudoku board to say if the board is valid or not
+
+Approach
+- Validate all 9 rows, columns
+- Loop over each rows, columns, and subsections
+- Validate each row, column and subsection
+- loop over all 9 rows, columns, subsections and validate them
+
+*/
+
+function getRow(grid,rowIdx) {
+    return grid[rowIdx];
+  }
+  
+  function getColumn(grid,colIdx) {
+    let columnArr = [];
+    for (let i = 0; i < grid.length; i++) {
+      columnArr.push(grid[i][colIdx])
+    }
+    return columnArr;
+  }
+  
+
+  function getSection(grid, x, y) { // x can be 0, 1, 2; y can be 0, 1, 2
+    x *= 3;
+    y *=3;
+    let sectionArr = [];
+    for (let i = y; i < y+3; i++) {    // multiple x and y value by 3
+      for (let j = x; j < x+3; j++) {
+        sectionArr.push(grid[i][j]);
+      } 
+    }
+    return sectionArr;
+  }
+
+
+function includes1to9(subSection) {
+  for(let i = 1; i < 10; i++) {
+    if( !(subSection.includes(i))) {
+      return false;
+    }
+  }
+  return true;
+}
+
+  
+function sudokuIsValid(grid) {
+  let checks = [];
+  for(let i = 0; i < grid.length; i++) {
+    checks.push(getRow(grid,i));
+    checks.push(getColumn(grid,i));
+  }
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      checks.push(getSection(grid,i,j))
+  }
+}
+for (let i = 0; i < checks.length; i++) {
+  if(!(includes1to9(checks[i]))) {
+    return false;
+  }
+}
+return true;
+}
+
+function isSame(grid,gr8d) {
+  for(let i = 0; i < puzzle.length; i++) {
+    for(let j = 0; j < puzzle[0].length; j++) {
+      if(puzzle[i][j] !== p8zzle[i][j]) {
+        return false;
+      }
+  }
+}
+return true;
+}
